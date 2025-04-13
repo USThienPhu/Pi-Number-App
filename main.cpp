@@ -2,7 +2,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "Hello world");
+    sf::RenderWindow window(sf::VideoMode(200, 200), "Say world");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Blue);
 
