@@ -1,23 +1,44 @@
 #include <SFML/Graphics.hpp>
+#include <iostream> 
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "Say world");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Blue);
-
-    while (window.isOpen())
+    sf::FileInputStream stream;
+    if (!stream.open("Asset\\Background.jpg"))
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        std::cerr << "Failed to open file stream" << std::endl; 
+        return -1;
+    }
+    sf::Texture tx;
+    if (!tx.loadFromStream(stream))
+    {
+        std::cerr << "Failed to load image from stream" << std::endl; 
+        return -1;
+    }
+
+    sf::Sprite sp(tx);
+    sf::Vector2u sz = tx.getSize();
+    int a_size = sz.x;
+    int b_size = sz.y;
+
+    sp.setPosition(0, 0);
+    sf::RenderWindow wd(sf::VideoMode(a_size, b_size), "Nheo Phu");
+
+    while (wd.isOpen())
+    {
+        sf::Event ev;
+        while (wd.pollEvent(ev))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            if (ev.type == sf::Event::Closed)
+            {
+                wd.close();
+            }
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+
+        wd.clear();
+        wd.draw(sp);
+        wd.display();
     }
 
     return 0;
