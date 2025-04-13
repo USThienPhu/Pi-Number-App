@@ -11,6 +11,13 @@ int main()
     sf::Font font;
     font.loadFromFile("Asset\\arial.ttf");
 
+
+    //load ảnh trong game
+    sf::Texture txG;
+    txG.loadFromFile("Asset\\GameBackground.jpg");
+    sf::Sprite spGameBG(txG);
+    spGameBG.setPosition(0, 0);
+
     //Lấy size ảnh và tạo Sprite
     sf::Sprite sp(tx);
     sf::Vector2u sz = tx.getSize();
@@ -30,7 +37,7 @@ int main()
 
 
     //Mở cửa sổ
-    RenderWindow(sp, a_size, b_size, startBtn);
+    RenderWindow(sp,spGameBG, a_size, b_size, startBtn);
 
     return 0;
 }

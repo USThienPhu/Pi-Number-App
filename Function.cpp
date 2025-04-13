@@ -1,10 +1,11 @@
 #include "Header.hpp"
 
 
-void RenderWindow(sf::Sprite sp, int x, int y, sf::Sprite &startBtn)
+void RenderWindow(sf::Sprite sp,sf::Sprite spG, int x, int y, sf::Sprite &startBtn)
 {
     sf::RenderWindow wd(sf::VideoMode(x, y), "Pi Number");
 
+    GameState state = MENU;
     while (wd.isOpen())
     {
         sf::Event ev;
@@ -14,16 +15,33 @@ void RenderWindow(sf::Sprite sp, int x, int y, sf::Sprite &startBtn)
             {
                 wd.close();
             }
-            if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left) {
-                if (isMouseOver(startBtn, wd)) {
-                    std::cout << "Start Game!\n";
+
+
+            if (state == MENU)
+            {
+                if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left) {
+                    if (isMouseOver(startBtn, wd)) {
+                        state = GAME;
+                    }
                 }
             }
+
+            
         }
-        wd.clear();
-        wd.draw(sp);
-        wd.draw(startBtn);
+        if (state == MENU)
+        {
+            wd.clear();
+            wd.draw(sp);
+            wd.draw(startBtn);
+        }
+        else if (state == GAME)
+        {
+            wd.clear();
+            wd.draw(spG);
+        }
+
         wd.display();
+      
     }
 }
 
