@@ -1,28 +1,24 @@
-#include <SFML/Graphics.hpp>
-#include <iostream> 
+#include "Header.hpp"
+
 
 int main()
 {
+    //Load ảnh vào texture
     sf::FileInputStream stream;
-    if (!stream.open("Asset\\Background.jpg"))
-    {
-        std::cerr << "Failed to open file stream" << std::endl; 
-        return -1;
-    }
+    stream.open("Asset\\Background.jpg");
     sf::Texture tx;
-    if (!tx.loadFromStream(stream))
-    {
-        std::cerr << "Failed to load image from stream" << std::endl; 
-        return -1;
-    }
+    tx.loadFromStream(stream);
+    
 
+    //Lấy size ảnh 
     sf::Sprite sp(tx);
     sf::Vector2u sz = tx.getSize();
     int a_size = sz.x;
     int b_size = sz.y;
-
     sp.setPosition(0, 0);
-    sf::RenderWindow wd(sf::VideoMode(a_size, b_size), "Nheo Phu");
+
+    //Mở cửa sổ
+    sf::RenderWindow wd(sf::VideoMode(a_size, b_size), "Pi Number");
 
     while (wd.isOpen())
     {
@@ -34,8 +30,6 @@ int main()
                 wd.close();
             }
         }
-
-
         wd.clear();
         wd.draw(sp);
         wd.display();
