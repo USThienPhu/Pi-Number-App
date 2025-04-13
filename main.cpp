@@ -1,49 +1,22 @@
 #include "Header.hpp"
 
 
-int main()
-{
-    //Load ảnh vào texture
-    sf::FileInputStream stream;
-    stream.open("Asset\\Background.jpg");
-    sf::Texture tx;
-    tx.loadFromStream(stream);
-    sf::Font font;
-    font.loadFromFile("Asset\\arial.ttf");
+int main() {
+    sf::RenderWindow window(sf::VideoMode(442, 786), "Game");
+
+    std::vector<Screen*> screens;
+    screens.push_back(new MenuScreen());
+    screens.push_back(new GameScreen());
+
+    int currentScreen = 0;
+
+    while(currentScreen >= 0 && currentScreen < screens.size())
+    {
+        currentScreen = screens[currentScreen]->run(window);
+        
+    }
 
 
-    //load ảnh trong game
-    sf::Texture txG;
-    txG.loadFromFile("Asset\\GameBackground.jpg");
-    sf::Sprite spGameBG(txG);
-    spGameBG.setPosition(0, 0);
-
-    //Exit button
-    sf::Texture txE;
-    txE.loadFromFile("Asset\\exit.png");
-    sf::Sprite spE(txE);
-    spE.setPosition(0,0);
-
-    //Lấy size ảnh và tạo Sprite
-    sf::Sprite sp(tx);
-    sf::Vector2u sz = tx.getSize(); 
-    int a_size = sz.x;
-    int b_size = sz.y;
-    sp.setPosition(0, 0);
-
-    //Tạo nút
-    int btnX = 236;
-    float centerX = (a_size - btnX) / 2.0f;
-
-    sf::Texture strBtn;
-    strBtn.loadFromFile("Asset\\start.png");
-    sf::Sprite startBtn(strBtn);
-
-    startBtn.setPosition(centerX, btnX);
-
-
-    //Mở cửa sổ
-    RenderWindow(sp,spGameBG, a_size, b_size, startBtn, spE);
-
+    
     return 0;
 }
