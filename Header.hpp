@@ -5,7 +5,8 @@
 #include <iostream> 
 
 
-
+void RenderWindow(sf::Sprite sp, int x, int y, sf::Sprite &startBtn);
+bool isMouseOver(sf::Sprite &button, sf::RenderWindow& wd);
 
 
 
