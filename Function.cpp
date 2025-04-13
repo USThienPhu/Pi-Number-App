@@ -1,7 +1,7 @@
 #include "Header.hpp"
 
 
-void RenderWindow(sf::Sprite sp,sf::Sprite spG, int x, int y, sf::Sprite &startBtn)
+void RenderWindow(sf::Sprite sp,sf::Sprite spG, int x, int y, sf::Sprite &startBtn, sf::Sprite &Exit)
 {
     sf::RenderWindow wd(sf::VideoMode(x, y), "Pi Number");
 
@@ -26,6 +26,16 @@ void RenderWindow(sf::Sprite sp,sf::Sprite spG, int x, int y, sf::Sprite &startB
                 }
             }
 
+            if (state == GAME)
+            {
+                if (ev.type == sf::Event::MouseButtonPressed && ev.mouseButton.button == sf::Mouse::Left)
+                {
+                    if (isMouseOver(Exit, wd))
+                    {
+                        state = MENU;
+                    }
+                }
+            }
             
         }
         if (state == MENU)
@@ -38,6 +48,7 @@ void RenderWindow(sf::Sprite sp,sf::Sprite spG, int x, int y, sf::Sprite &startB
         {
             wd.clear();
             wd.draw(spG);
+            wd.draw(Exit);
         }
 
         wd.display();

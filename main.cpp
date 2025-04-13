@@ -18,9 +18,15 @@ int main()
     sf::Sprite spGameBG(txG);
     spGameBG.setPosition(0, 0);
 
+    //Exit button
+    sf::Texture txE;
+    txE.loadFromFile("Asset\\exit.png");
+    sf::Sprite spE(txE);
+    spE.setPosition(0,0);
+
     //Lấy size ảnh và tạo Sprite
     sf::Sprite sp(tx);
-    sf::Vector2u sz = tx.getSize();
+    sf::Vector2u sz = tx.getSize(); 
     int a_size = sz.x;
     int b_size = sz.y;
     sp.setPosition(0, 0);
@@ -37,7 +43,7 @@ int main()
 
 
     //Mở cửa sổ
-    RenderWindow(sp,spGameBG, a_size, b_size, startBtn);
+    RenderWindow(sp,spGameBG, a_size, b_size, startBtn, spE);
 
     return 0;
 }
