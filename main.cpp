@@ -1,5 +1,6 @@
 #include "Header.hpp"
 #include "Screens.hpp"
+#include <filesystem>
 
 
 int main() {
@@ -10,6 +11,8 @@ int main() {
     screens.push_back(new GameScreen());
 
     int currentScreen = 0;
+
+    std::cerr << "Current working directory: " << std::filesystem::current_path() << std::endl;
 
     while(currentScreen >= 0 && currentScreen < screens.size())
     {
